@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { getStorage,ref,getDownloadURL, uploadBytesResumable  } from "firebase/storage";
-import { getFirestore,collection,addDoc,deleteDoc } from "firebase/firestore";
+import { getFirestore,collection,addDoc,updateDoc,doc } from "firebase/firestore";
 
 import { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import app from './Firebase';
-function Addblog() {
+function Editblog() {
+    const location=useLocation();
     const navigate = useNavigate();
     const storage = getStorage(app);
     const db = getFirestore(app);
@@ -57,13 +58,12 @@ function Addblog() {
             
             // console.log(submit_status,upload_status);
             // changeupstatus(false);
-
     }
     return (
         <>
             {/* <LoadingBar style={{ 'backgroundColor': 'red', 'zIndex': 10 }} ref={ref} /> */}
             <div className="w-3/4 mx-auto my-5">
-                <h1 className="text-black text-xl font-bold my-10 mx-auto w-1/2 text-center">Add Blog</h1>
+                <h1 className="text-black text-xl font-bold my-10 mx-auto w-1/2 text-center">Edit Blog</h1>
                 <div className="relative z-0 w-full mb-6 group">
                     <input type="text" onChange={(e) => {
                         changetitle(e.target.value);
@@ -107,7 +107,7 @@ function Addblog() {
                         
                         today = mm + '-' + dd + '-' + yyyy;
                         // document.write(today);
-                        addDoc(collection(db, "blogs"), {
+                        updateDoc(doc(db,'blogs',location.state.id), {
                             'title': title,
                             'subtitle': subtitle,
                             'caption': caption,
@@ -124,7 +124,7 @@ function Addblog() {
                         });
                        console.log(imagearray);
                        changeimagearray([]);
-                    }}>Submit</button>
+                    }}>Update</button>
                 </div>
             </div>
         </>
@@ -132,4 +132,4 @@ function Addblog() {
 }
 
 
-export default Addblog;
+export default Editblog;
