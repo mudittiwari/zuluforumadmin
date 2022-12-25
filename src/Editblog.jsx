@@ -59,6 +59,9 @@ function Editblog() {
             // console.log(submit_status,upload_status);
             // changeupstatus(false);
     }
+    useEffect(()=>{
+        console.log(location.state);
+    },[])
     return (
         <>
             {/* <LoadingBar style={{ 'backgroundColor': 'red', 'zIndex': 10 }} ref={ref} /> */}

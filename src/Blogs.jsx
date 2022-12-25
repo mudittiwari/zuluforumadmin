@@ -82,7 +82,7 @@ function Blogs() {
                                     }}>Delete</button>
                                     <button className="bg-white text-black w-24 rounded-lg border-0 px-3 py-2 my-2 mx-8" style={{'border':'1px solid black'}} onClick={async (e) => {
                                         e.preventDefault();
-                                        navigate('/editblog',{state:{'doc':value}})
+                                        navigate('/editblog',{state:{'id':value.id,'data':value.data()}})
                                         // e.preventDefault();
                                     }}>Edit</button>
                                 </div>
